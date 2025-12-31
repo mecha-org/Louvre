@@ -209,25 +209,25 @@ void Keyboard::focusChanged()
 {
     /* Here we use the current keyboard focus client to set the topbar app name */
 
-    LTexture *topbarTitleTexture { nullptr };
+    // LTexture *topbarTitleTexture { nullptr };
 
-    if (focus())
-    {
-        Client *client = (Client*)focus()->client();
+    // if (focus())
+    // {
+    //     Client *client = (Client*)focus()->client();
 
-        if (client->app && client->app->nameTexture)
-            topbarTitleTexture = client->app->nameTexture;
-        else
-            topbarTitleTexture = G::textures()->defaultTopbarAppName;
-    }
-    else
-    {
-        topbarTitleTexture = G::textures()->defaultTopbarAppName;
-    }
+    //     if (client->app && client->app->nameTexture)
+    //         topbarTitleTexture = client->app->nameTexture;
+    //     else
+    //         topbarTitleTexture = G::textures()->defaultTopbarAppName;
+    // }
+    // else
+    // {
+    //     topbarTitleTexture = G::textures()->defaultTopbarAppName;
+    // }
 
-    for (Output *output : G::outputs())
-    {
-        output->topbar.appName.setTexture(topbarTitleTexture);
-        output->topbar.update();
-    }
+    // for (Output *output : G::outputs())
+    // {
+    //     // output->topbar.appName.setTexture(topbarTitleTexture);
+    //     // output->topbar.update();
+    // }
 }

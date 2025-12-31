@@ -48,7 +48,7 @@ struct DRMTexture
 struct WaylandOutput
 {
     UInt32 name;
-    Int32 bufferScale { 1 };
+    Int32 bufferScale { 2 };
     Int32 refresh { 60000 };
 };
 
@@ -105,8 +105,8 @@ public:
     inline static UInt32 refreshRate { 60000 };
     inline static Int32 refreshRateLimit { 0 };
     inline static LSize physicalSize { 0, 0 };
-    inline static LSize pendingSurfaceSize { 1024, 512 };
-    inline static Int32 pendingBufferScale { 1 };
+    inline static LSize pendingSurfaceSize { 540, 620 };
+    inline static Int32 pendingBufferScale { 2 };
     inline static std::vector<LGPU*> devices;
     inline static LGPU allocator;
     inline static std::vector<LOutput*> dummyOutputs;
@@ -1292,7 +1292,7 @@ public:
     static void updateSurfaceScale()
     {
         const Int32 oldScale { pendingBufferScale };
-        pendingBufferScale = 1;
+        pendingBufferScale = 2;
 
         for (auto *output : surfaceOutputs)
         {

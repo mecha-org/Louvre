@@ -349,12 +349,19 @@ void Surface::minimizedChanged()
                     item->dock->update();
                 }
 
+                // Calculate bottom center of the current output
+                LPoint bottomCenter(
+                    minimizedOutput->pos().x() + minimizedOutput->size().w() / 2,
+                    minimizedOutput->pos().y() + minimizedOutput->size().h()
+                );
                 // Scale and move fullsize view to the dock
                 LRegion trans { minimizedTransRegion };
                 trans.multiply(1.f - x);
                 thumbnailFullsizeView->setTranslucentRegion(&trans);
                 thumbnailFullsizeView->setDstSize((thumbnailFullsizeView->texture()->sizeB() / thumbnailFullsizeView->bufferScale()) * (1.f - x));
-                thumbnailFullsizeView->setPos((dstDockItem->pos() + dstDockItem->size()) * x +
+
+                // Set minimize position to center
+                thumbnailFullsizeView->setPos(bottomCenter * x +
                          minimizeStartRect.pos() * (1.f - x));
             });
 
@@ -512,7 +519,14 @@ void Surface::unminimize(DockItem *clickedItem)
         thumbnailFullsizeView->setDstSize((thumbnailFullsizeView->texture()->sizeB() / thumbnailFullsizeView->bufferScale()) * x);
 
         // Scale and move fullsize view to the dock
-        thumbnailFullsizeView->setPos((clickedItem->pos() + clickedItem->size()) * (1.f - x) +
+        Output *o = minimizedOutput ? minimizedOutput : (Output*)cursor()->output();
+        LPoint bottomCenter(
+            o->pos().x() + o->size().w() / 2,
+            o->pos().y() + o->size().h()
+        );
+
+         // Use the output where the surface was minimized
+        thumbnailFullsizeView->setPos(bottomCenter * (1.f - x) +
                  minimizeStartRect.pos() * x);
     });
 

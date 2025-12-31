@@ -46,31 +46,31 @@ void Compositor::initialized()
 
     clockMinuteTimer.setCallback([](LTimer *timer)
     {
-        if (G::font()->regular)
-        {
-            char text[64];
-            time_t rawtime;
-            struct tm *timeinfo;
-            time(&rawtime);
-            timeinfo = localtime(&rawtime);
-            strftime(text, sizeof(text), "%a %b %d, %I:%M %p", timeinfo);
+        // if (G::font()->regular)
+        // {
+        //     char text[64];
+        //     time_t rawtime;
+        //     struct tm *timeinfo;
+        //     time(&rawtime);
+        //     timeinfo = localtime(&rawtime);
+        //     strftime(text, sizeof(text), "%a %b %d, %I:%M %p", timeinfo);
 
-            LTexture *newClockTexture = G::font()->regular->renderText(text, 22);
+        //     LTexture *newClockTexture = G::font()->regular->renderText(text, 22);
 
-            if (newClockTexture)
-            {
-                for (Output *o : G::outputs())
-                {
-                    o->topbar.clock.setTexture(newClockTexture);
-                    o->topbar.update();
-                }
+        //     if (newClockTexture)
+        //     {
+        //         for (Output *o : G::outputs())
+        //         {
+        //             o->topbar.clock.setTexture(newClockTexture);
+        //             o->topbar.update();
+        //         }
 
-                if (G::compositor()->clockTexture)
-                    delete G::compositor()->clockTexture;
+        //         if (G::compositor()->clockTexture)
+        //             delete G::compositor()->clockTexture;
 
-                G::compositor()->clockTexture = newClockTexture;
-            }
-        }
+        //         G::compositor()->clockTexture = newClockTexture;
+        //     }
+        // }
 
         timer->start(millisecondsUntilNextMinute() + 1500);
     });

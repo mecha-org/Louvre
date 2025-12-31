@@ -179,16 +179,16 @@ void LLayerRole::handleSurfaceCommit(CommitOrigin /*origin*/) noexcept
             }
         }
 
-        if (pendingAtoms().size.h() == 0)
-        {
-            if (pendingAtoms().anchor.checkAll(LEdgeTop | LEdgeBottom) == 0)
-            {
-                wl_resource_post_error(res.resource(),
-                                       ZWLR_LAYER_SURFACE_V1_ERROR_INVALID_SIZE,
-                                       "height is 0 but anchors do not include top and bottom (anchor must be set to opposite edges in the omitted dimensions)");
-                return;
-            }
-        }
+        // if (pendingAtoms().size.h() == 0)
+        // {
+        //     if (pendingAtoms().anchor.checkAll(LEdgeTop | LEdgeBottom) == 0)
+        //     {
+        //         wl_resource_post_error(res.resource(),
+        //                                ZWLR_LAYER_SURFACE_V1_ERROR_INVALID_SIZE,
+        //                                "height is 0 but anchors do not include top and bottom (anchor must be set to opposite edges in the omitted dimensions)");
+        //         return;
+        //     }
+        // }
 
         needsConfigure = true;
     }
