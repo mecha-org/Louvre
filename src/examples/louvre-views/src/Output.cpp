@@ -45,8 +45,8 @@ void Output::initializeGL()
 {
     workspacesContainer.setParent(&G::compositor()->workspacesLayer);
     currentWorkspace = new Workspace(this);
-    topbar.initialize();
-    dock.initialize();
+//    topbar.initialize();
+//    dock.initialize();
     wallpaper.setParent(&G::compositor()->backgroundLayer);
     updateWallpaper();
     updateWorkspacesPos();
